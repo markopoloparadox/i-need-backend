@@ -6,7 +6,8 @@ const ENV = require("./config");
 
 const server = new Hapi.Server({
     host: "localhost",
-    port: 3000
+    port: 8000,
+    routes: { cors: true }
 });
 
 const uri = ENV.MONGODBURI;

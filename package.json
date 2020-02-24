@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Marko Petrlic",
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^19.1.1",
