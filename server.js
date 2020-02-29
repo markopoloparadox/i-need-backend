@@ -1,25 +1,23 @@
-"use strict";
+// imports
+import mongoose from "mongoose";
+import Hapi from "@hapi/hapi";
+import { ENV } from "./config.js";
+import { Routes } from "./routes/index.js";
+import { ConnectToDatabase } from "./helper/common.js"
 
-const mongoose = require("mongoose");
-const Hapi = require("@hapi/hapi");
-const ENV = require("./config");
-
+// Server configuration
 const server = new Hapi.Server({
     host: "localhost",
     port: 8000,
     routes: { cors: true }
 });
 
-const uri = ENV.MONGODBURI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+// Database 
+if (!ConnectToDatabase(mongoose, ENV.MONGODBURI)) {
+    console.log("Server failed to start!");
+}
+else {
+    server.route(Routes);
+    server.start();
+}
 
-const connection = mongoose.connection;
-connection.once("open", () => {
-    console.log("MongoDB database connection established successfully");
-});
-
-
-
-const routes = require("./routes/index");
-server.route(routes);
-server.start();

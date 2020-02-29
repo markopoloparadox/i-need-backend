@@ -1,21 +1,17 @@
-const mongoose = require("mongoose");
-let Person = require("./person.model");
-let BusinessType = require("./businessType.model");
-
+// Imports
+import mongoose from "mongoose";
+import { PersonModel } from "./person.model.js";
+import { BusinessTypeModel } from "./business_type.model.js";
 const Schema = mongoose.Schema;
 
-const businessSchema = new Schema({
+// Schema
+const BusinessSchema = new Schema({
     name: { type: String, required: true },
-    startDate: { type: Date, required: true },
-    owners: [{ type: mongoose.Schema.Types.ObjectId, ref: Person }],
-    employees: [{ type: mongoose.Schema.Types.ObjectId, ref: Person }],
     location: { type: String, required: true },
-    type: { type: mongoose.Schema.Types.ObjectId, ref: BusinessType },
-    description: { type: String, required: false }
-},
-{
-    timestamps: true,
-});
+    type: { type: mongoose.Schema.Types.ObjectId, ref: BusinessTypeModel, required: true },
+    owners: [{ type: mongoose.Schema.Types.ObjectId, ref: PersonModel, required: false }],
+}, { timestamps: true, });
 
-const Business = mongoose.model("Business", businessSchema);
-module.exports = Business;
+// Exports
+const BusinessModel = mongoose.model("business", BusinessSchema);
+export { BusinessModel };

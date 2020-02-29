@@ -1,6 +1,7 @@
-"use strict";
+// Imports
+import BusinessTypeRoutes from "./business_type.js"
+import BusinessRoutes from "./business.js"
 
-var test = require("./test");
-var person = require("./person");
-
-module.exports = [].concat(test, person);
+// Exports
+const Routes = [].concat(BusinessTypeRoutes, BusinessRoutes);
+export  { Routes };
