@@ -6,7 +6,7 @@ const DEFAULT_PATH = "/businesstype";
 async function findAllRouteFn(req, h) {
     try {
         let result = await BusinessTypeModel.find();
-        return h.response();
+        return h.response(result);
     } catch (err) {
         return h.response(JSON.stringify(err)).code(500);
     }
